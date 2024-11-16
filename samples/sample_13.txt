@@ -1,0 +1,9 @@
+Graph: 
+	1: [2, 3, 4]
+	2: [1, 4]
+	3: [4, 1]
+	4: [2, 3, 1]
+
+Independent Set: [2, 3]
+
+Maximum Independent Set Size: 2
