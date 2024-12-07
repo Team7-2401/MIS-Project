@@ -5,6 +5,8 @@ import bruteForce
 import sampleGen
 import visualize
 import time
+from heuristic import DisassembleAlgorithm
+from verify import validate_independent_set
 
 def main():
     # Create the plots and samples directory if they doesn't exist
@@ -42,7 +44,15 @@ def main():
         start = time.time()
         graph = sampleGen.generate_graph(num_vertices, edge_prob)
         # Find MIS
-        independent_set = bruteForce.maximum_independent_set(graph)
+        # independent_set = bruteForce.maximum_independent_set(graph)
+        # Initialize the DisassembleAlgorithm class
+        algorithm = DisassembleAlgorithm(graph)
+        # Run the algorithm
+        independent_set, alpha = algorithm.disassemble()
+        is_valid = validate_independent_set(graph, independent_set)
+        if(not is_valid):
+            print("Invalid independent set found")
+            break    
         end = time.time()
 
         # Add the result to the dataframe
