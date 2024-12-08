@@ -75,7 +75,7 @@ def save_graph(filename, graph):
         f.write(str(len(graph)) + '\n')
         f.write("graph= {\n")
         for node, neighbors in graph.items():
-            f.write("\t{node} : {neighbors}\n")
+            f.write(f"\t{node} : {neighbors}\n")
         f.write("}\n")
 
 
