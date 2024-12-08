@@ -6,7 +6,7 @@ testGen.generateTests(dirname="testim", no_of_tests=10, check_size='y', check_pr
 print("starting to generate tests")
 df = pd.DataFrame(columns=['Test', 'Vertices', 'Edge Probability', 'filename'])
 
-for i in range (5, 10):
+for i in range (5, 1005, 10):
     print("i:", i)
     data = testGen.generateTests(dirname="6", no_of_tests=30, check_size='y', check_prob='n', size=i, prob=[0.02, 0.6])
     for index, row in data.iterrows():
