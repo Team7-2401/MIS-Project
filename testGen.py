@@ -27,7 +27,7 @@ def generateTests(dirname=None, no_of_tests=None, check_size=None, check_prob=No
             if not prob:
                 prob = float(input("Enter the edge probability: "))
             for i in range(no_of_tests):
-                filename = dirname + '/test_' + str(i) + ".txt"
+                filename = dirname + '/test' + f"_v({size})" + f"_p({prob})" + f"_no({i})" + ".txt"
                 graph = sampleGen.generate_graph(size, prob)
                 df.loc[len(df)] = [i, size, prob, filename]
 
@@ -37,7 +37,7 @@ def generateTests(dirname=None, no_of_tests=None, check_size=None, check_prob=No
             if not prob:
                 prob = input("Enter the edge probability range (e.g. 0,1): ").split(',')
             for i in range(no_of_tests):
-                filename = dirname + '/test_' + str(i) + ".txt"
+                filename = dirname + '/test' + f"_v({size})" + f"_p({prob})" + f"_no({i})" + ".txt"
                 graph = sampleGen.generate_graph(size, random.uniform(float(prob[0]), float(prob[1])))
                 df.loc[len(df)] = [i, size, prob, filename]
 
@@ -50,7 +50,7 @@ def generateTests(dirname=None, no_of_tests=None, check_size=None, check_prob=No
             if not prob:
                 prob = float(input("Enter the edge probability: "))
             for i in range(no_of_tests):
-                filename = dirname + '/test_' + str(i) + ".txt"
+                filename = dirname + '/test' + f"_v({size})" + f"_p({prob})" + f"_no({i})" + ".txt"
                 graph = sampleGen.generate_graph(random.randint(int(size[0]), int(size[1])), prob)
                 df.loc[len(df)] = [i, size, prob, filename]
 
@@ -60,14 +60,15 @@ def generateTests(dirname=None, no_of_tests=None, check_size=None, check_prob=No
             if not prob:
                 prob = input("Enter the edge probability range (e.g. 0,1): ").split(',')
             for i in range(no_of_tests):
-                filename = dirname + '/test_' + str(i) + ".txt"
+                filename = dirname + '/test' + f"_v({size})" + f"_p({prob})" + f"_no({i})" + ".txt"
                 graph = sampleGen.generate_graph(random.randint(int(size[0]), int(size[1])), random.uniform(float(prob[0]), float(prob[1])))
                 df.loc[len(df)] = [i, size, prob, filename]
 
                 #save test
                 save_graph(filename, graph)
 
-    df.to_csv(dirname + '/test_info.csv', index=False)
+    # df.to_csv(dirname + '/test_info.csv', index=False)
+    return df
 
 
 def save_graph(filename, graph):
