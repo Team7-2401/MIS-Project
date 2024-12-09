@@ -6,6 +6,9 @@ import time
 import threading
 from concurrent.futures import ThreadPoolExecutor, TimeoutError
 
+result_lock = threading.Lock()
+counter_lock = threading.Lock()
+
 def heuristic_with_timeout(graph, timeout=300):
     """
     Runs the heuristic algorithm with a timeout.
@@ -68,13 +71,13 @@ def run_tests(row):
     bfTime = end - start
     print("Brute Force Time:", bfTime)
 
-    start = time.time() 
-    algorithm = DisassembleAlgorithm(graph)
-    independent_set, alpha = algorithm.disassemble()
-    print("Heuristic Result Size:", alpha)
-    end = time.time()
-    heuristicTime = end - start
-    print("Heuristic Time:", heuristicTime)
+    # start = time.time() 
+    # algorithm = DisassembleAlgorithm(graph)
+    # independent_set, alpha = algorithm.disassemble()
+    # print("Heuristic Result Size:", alpha)
+    # end = time.time()
+    # heuristicTime = end - start
+    # print("Heuristic Time:", heuristicTime)
 
     # Heuristic
     failed = False
@@ -91,7 +94,17 @@ def run_tests(row):
         print("Heuristic failed!")
         return [row['Test'], row['Vertices'], row['filename'], bfResultSize, bfTime, -1, 0]
     
+    global counterG
+    with counter_lock: 
+        counterG += 1
+    print("Counter:", counterG)
     return [row['Test'], row['Vertices'], row['filename'], bfResultSize, bfTime, alpha, heuristicTime]
+
+def run_tests_threading(row, results):
+    result = run_tests(row)
+    with result_lock:
+        results.loc[len(results)] = result
+    return
 
 def make_thread(i, df, resultHolder):
     print("Thread:", i)
@@ -101,23 +114,53 @@ def make_thread(i, df, resultHolder):
             print("Thread:", i, "Test:", row['Test'], "Vertices:", row['Vertices'])
             results.loc[len(results)] = run_tests(row)
     print("Thread:", i, "finished")
+    results.to_csv(f"./7/results_test_intermediate_{i}.csv", index=False)
     resultHolder[i] = results
     return
 
+counterG = 0
 
 results = None
+
+def get_processed():
+    # list all the files in 7
+    files = os.listdir("./7")
+    files = [f for f in files if f.startswith("results_test_intermediate_")]
+    processed = pd.DataFrame(columns=['Test', 'Vertices', 'filename', 'Brute Force', 'Brute Force Time','Heuristic', 'Heuristic Time'])
+
+    for file in files:
+        df = pd.read_csv(f"./7/{file}")
+        processed = pd.concat([processed, df], ignore_index=True)
+
+    return processed
+
 
 def main():
     df = pd.read_csv("./7/results.csv")
 
     global results
     results=pd.DataFrame(columns=['Test', 'Vertices', 'filename', 'Brute Force', 'Brute Force Time','Heuristic', 'Heuristic Time'])
-    resultHolder = [None]*15
+    resultHolder = [None]*len(df)
 
+    
+    processed = get_processed()
+
+    unprocessed = df[~df['filename'].isin(processed['filename'])]
+    print("Unprocessed:", len(unprocessed))
 
     sample = df.sample(n=40, random_state=2)
     # implement threading
     threads = []
+    # for i in range(len(sample)):
+    #     print("Thread:", i)
+    #     t = threading.Thread(target=run_tests_threading, args=(sample.iloc[i], results))
+    #     t.start()
+    #     threads.append(t)
+
+    # for t in threads:
+    #     print("Joining thread ", t)
+    #     t.join()
+
     for i in range(15):
         t = threading.Thread(target=make_thread, args=(i, df, resultHolder))
         t.start()
@@ -126,15 +169,12 @@ def main():
     counter = 0
     for t in threads:
         t.join()
-        results = pd.concat([results, resultHolder[counter]], ignore_index=True)
-        counter += 1
-        results.to_csv("./7/results_test_intermediate.csv", index=False)
-
+        
     for i in range(15):
         if resultHolder[i] is not None:
             results = pd.concat([results, resultHolder[i]], ignore_index=True)
 
-    results.to_csv("./7/results_test.csv", index=False)
+    results.to_csv("./7/results_test_test.csv", index=False)
 
 
 
