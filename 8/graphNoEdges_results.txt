@@ -1,0 +1,7 @@
+Maximal Independent Set:
+1
+2
+3
+4
+5
+Cardinality: 5

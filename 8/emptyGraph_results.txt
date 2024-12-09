@@ -1,0 +1,2 @@
+Maximal Independent Set:
+Cardinality: 0
