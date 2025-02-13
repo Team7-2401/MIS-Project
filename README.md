@@ -33,35 +33,35 @@ The **Maximum Independent Set Problem (MIS)** involves finding the largest set o
 
 ---
 
-## 📁 Project Structure  
-📂 MIS-Project
-├── 📂 6 — Section 6 test results (CSV)
-├── 📂 7 — Final changes for Section 7
-├── 📂 8 — Section 8 test results
-├── 📂 plots — Graph plots for heuristic tests
-├── 📂 samples — Generated sample graphs
-├── .gitignore — Git ignore file
-├── LICENSE — MIT License
-├── README.md — Project readme file
-├── bruteForce.py — Brute-force algorithm implementation
-├── heuristic.py — Heuristic algorithm implementation
-├── heuristicvisual.py — Visualization script for heuristic tests
-├── main.py — Main script for running the algorithms
-├── results.csv — CSV file containing test results
-├── sampleGen.py — Random instance generator
-├── section6Analysis.ipynb — Jupyter Notebook for Section 6 analysis
-├── section6Samples.py — Section 6 sample generation script
-├── section6Tests.py — Section 6 test script
-├── section7Analysis.ipynb — Jupyter Notebook for Section 7 analysis
-├── section7Samples.py — Section 7 sample generation script
-├── section7Tests.py — Section 7 test script
-├── section8Samples.py — Section 8 sample generation script
-├── section8Tests.py — Section 8 test script
-├── stats.py — Statistical analysis script
-├── testGen.py — Test generation script
-├── testinfo.txt — Information on heuristic test samples
-├── verify.py — Heuristic validation script
-└── visualize.py — Graph visualization functions
+## 📁 Project Structure
+📂 MIS-Project  
+ ├── 📂 6                        # Section 6 test results (CSV)  
+ ├── 📂 7                        # Final changes for Section 7  
+ ├── 📂 8                        # Section 8 test results  
+ ├── 📂 plots                    # Graph plots for heuristic tests  
+ ├── 📂 samples                  # Generated sample graphs  
+ ├── .gitignore                  # Git ignore file  
+ ├── LICENSE                     # MIT License  
+ ├── README.md                   # Project readme file  
+ ├── bruteForce.py               # Brute-force algorithm implementation  
+ ├── heuristic.py                # Heuristic algorithm implementation  
+ ├── heuristicvisual.py          # Visualization script for heuristic tests  
+ ├── main.py                     # Main script for running the algorithms  
+ ├── results.csv                 # CSV file containing test results  
+ ├── sampleGen.py                # Random instance generator  
+ ├── section6Analysis.ipynb      # Jupyter Notebook for Section 6 analysis  
+ ├── section6Samples.py          # Section 6 sample generation script  
+ ├── section6Tests.py            # Section 6 test script  
+ ├── section7Analysis.ipynb      # Jupyter Notebook for Section 7 analysis  
+ ├── section7Samples.py          # Section 7 sample generation script  
+ ├── section7Tests.py            # Section 7 test script  
+ ├── section8Samples.py          # Section 8 sample generation script  
+ ├── section8Tests.py            # Section 8 test script  
+ ├── stats.py                    # Statistical analysis script  
+ ├── testGen.py                  # Test generation script  
+ ├── testinfo.txt                # Information on heuristic test samples  
+ ├── verify.py                   # Heuristic validation script  
+ └── visualize.py                # Graph visualization functions  
 
 ---
 
