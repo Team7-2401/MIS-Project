@@ -1,7 +1,7 @@
 # MIS-Project 🚀  
 **Maximum Independent Set Problem Analysis and Implementation**  
 
-Welcome to the MIS-Project repository! This project focuses on analyzing and implementing solutions for the **Maximum Independent Set (MIS) Problem**, a classic NP-hard problem in graph theory. The repository includes both a **brute-force** and a **heuristic algorithm** to solve the MIS problem, along with comprehensive experimental analysis.
+Welcome to the MIS-Project repository! This project focuses on analyzing and implementing solutions for the **Maximum Independent Set (MIS) Problem**, a classic NP-complete problem in graph theory. The repository includes both a **brute-force** and a **heuristic algorithm** to solve the MIS problem, along with comprehensive experimental analysis.
 
 ---
 
